@@ -5,11 +5,12 @@ interface Props {
 const { currentNav } = Astro.props;
 
 const navs = [
-	{ name: 'Home', href: '/' },
-	{ name: 'Blog', href: '/blog' },
-	{ name: 'Tags', href: '/tags' },
-	{ name: 'Archives', href: '/archives' },
-	{ name: 'About', href: '/about' },
+	{ name: '首页', href: '/' },
+	{ name: '文章', href: '/blog' },
+	{ name: '标签', href: '/tags' },
+	{ name: '归档', href: '/archives' },
+	{ name: '朋友们', href: '/friends', target:"_blank", rel:"noopener noreferrer"},
+	{ name: '关于', href: '/about' },
 ];
 ---
 

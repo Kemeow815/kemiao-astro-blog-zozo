@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-import img from '~/assets/undraw_dog_c7i6.svg';
+import img from '~/assets/kemiao.svg';
 import { SiteDescription, SiteTitle } from '~/config';
 import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
 ---
@@ -12,36 +12,31 @@ import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
 	currentNav="Home"
 >
 	<div class="flex flex-col items-center gap-4 xl:flex-row">
-		<Picture class="lg:max-w-md" src={img} formats={['avif', 'webp']} alt="a dog" loading="eager" />
+		<Picture class="lg:max-w-md" src={img} formats={['avif', 'webp']} alt="kemiao" loading="eager" />
 		<div>
-			<h1>Hello there! I am Ladit👋</h1>
+			<h1>Hello there! I am 克喵爱吃卤面.👋</h1>
 			<p>
-				This is a blog template built with <a href="https://astro.build">Astro</a>. The theme
-				originates from <a href="https://github.com/varkai/hugo-theme-zozo">hugo-theme-zozo</a>.
-				Check out <a href="/posts/getting-started">the docs</a> to get started. Here are some
-				features:
+				这是基于<a href="https://astro.build">Astro</a>的博客，主题是<a href="https://github.com/ladit/astro-blog-zozo">astro-blog-zozo</a>。
+				克喵在这个博客发布一些资源分享、踩坑教程和生活记录。
 			</p>
 			<ul class="list-disc">
 				<li>
-					Fast and light weight. Lighthouse 4 * 100/100 on desktop. 1 point decreased on mobile.
+					支持开源精神，开源项目分享居多，不修改所分享的东西，尽可能去筛选出危险资源。
 				</li>
 				<li>
-					<a href="https://astro.build">Astro 4</a> with no other UI frameworks integrated for better
-					performance
+					分享的大部分是个人认为好用的软件、网站和项目，想让我找资源的可以在上方的social部分联系，不保证找到，看到会回。
 				</li>
 				<li>
-					mobile-friendly responsive design with <a href="https://tailwindcss.com/">Tailwind CSS</a>
+					如果我分享的资源侵犯了您的权益，建议直接在GitHub仓库的<a href="https://github.com/Kemeow815/kemiaofx/issues">issue</a>提出和<a href="mailto:me@kemiaosw.top">邮箱</a>找我，看到会删。
 				</li>
+				<li>您有什么想分享的资源可以通过上述链接告诉我，也可以通过TG的<a href="https://t.me/kemiaotougao_bot">机器人</a>找<strong>我</strong></li>
 				<li>
-					Light / dark theme derived from <a href="https://github.com/varkai/hugo-theme-zozo"
-						>hugo-theme-zozo</a
-					>
+					本博客的主题来源于<a href="https://github.com/ladit/astro-blog-zozo">astro-blog-zozo</a>，感谢作者开源。
 				</li>
-				<li>Markdown post support with emoji shortcode, katex</li>
-				<li>static search with <a href="https://pagefind.app">Pagefind</a></li>
-				<li>comment system powered by <a href="https://github.com/giscus/giscus">giscus</a></li>
-				<li>SEO-friendly setup with canonical URLs and OpenGraph data</li>
-				<li>RSS / Sitemap.xml / dynamic open graph image generation</li>
+				<li>以下就是克喵部署的<a href="https://github.com/Kemeow815/kemiao-s-links">网站仓库</a>，你可以在这里找到克喵部署的大部分博客（基本静态），你可以看看有什么你需要的。</li>
+				<li>本博客所有图片来源于以下四个地方：1.GitHub图床(半废弃)；2.sm.ms图床(不再使用)；3.本地链接(/img/xxx.png)；4.123云盘图床。</li>
+				<li>评论部分是<a href="https://github.com/giscus/giscus">giscus</a>，可以在仓库的<a href="https://github.com/Kemeow815/kemiao-astro-blog-zozo/discussions"><strong>discussions</strong></a>里找到。</li>
+				<li>您可以在RSS阅读平台如Folo里使用链接来订阅克喵的最新文章~</li>
 			</ul>
 		</div>
 	</div>
