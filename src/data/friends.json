@@ -1,50 +1,9 @@
 [
-    {
-      "name": "技术狂想曲",
-      "url": "https://tech-enthusiast.blog",
-      "avatar": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "专注于前沿技术探索与实践，分享Web开发、AI应用与系统架构的深度文章。",
-      "status": "active",
-      "tags": ["技术博客", "每周更新"]
-    },
-    {
-      "name": "设计思维",
-      "url": "https://design-thinking.io",
-      "avatar": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "探索UI/UX设计、产品思维与创意表达，帮助设计师提升专业能力和职业发展。",
-      "status": "active",
-      "tags": ["设计", "创意"]
-    },
-    {
-      "name": "数据科学之路",
-      "url": "https://datascience-path.com",
-      "avatar": "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "数据科学、机器学习与统计分析的专业博客，提供实用教程和行业洞见。",
-      "status": "active",
-      "tags": ["数据科学", "AI"]
-    },
-    {
-      "name": "前端探险家",
-      "url": "https://frontend-explorer.dev",
-      "avatar": "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "专注现代前端开发技术，分享React、Vue和TypeScript的实战经验和最佳实践。",
-      "status": "active",
-      "tags": ["前端", "框架"]
-    },
-    {
-      "name": "算法花园",
-      "url": "https://algorithm-garden.com",
-      "avatar": "https://images.unsplash.com/photo-1581094794329-64b288c6ecb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "算法学习与竞赛指南，LeetCode解题思路分享，帮助开发者提升算法能力。",
-      "status": "inactive",
-      "tags": ["算法", "竞赛"]
-    },
-    {
-      "name": "DevOps实践",
-      "url": "https://devops-practice.org",
-      "avatar": "https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "description": "分享容器化、CI/CD、自动化测试和云原生技术的实践经验与解决方案。",
-      "status": "active",
-      "tags": ["DevOps", "云原生"]
-    }
-  ]
+  {
+    "name": "纸鹿摸鱼处",
+    "avatar": "https://www.zhilu.cyou/api/avatar.png",
+    "description": "纸鹿至麓不知路，支炉制露不止漉",
+    "url": "https://blog.zhilu.cyou/",
+    "alive": true
+  }
+]

@@ -1,577 +1,148 @@
 ---
 // src/pages/friends.astro
-import Layout from '../layouts/Layout.astro';
+
+import Layout from '../layouts/FriendsLayout.astro';
 import friendsData from '../data/friends.json';
 
-const pageTitle = "友情链接";
-const pageDescription = "与志同道合的伙伴们互相交流，共同进步";
+// 页面元数据
+export const title = "友情链接";
+export const description = "与志同道合的朋友们互联";
+
+// 深色模式状态
+let darkMode = false;
+if (typeof window !== 'undefined') {
+  darkMode = localStorage.getItem('darkMode') === 'true';
+  document.documentElement.classList.toggle('dark', darkMode);
+}
+
+// 切换深色模式函数
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <div class="friends-page">
-    <header>
-      <div class="container">
-        <div class="header-content">
-          <a href="blog-v8.kemeow.top" class="logo">
-            <div class="logo-icon">
-              <i class="fas fa-paw"></i>
-            </div>
-            <div class="logo-text">克喵的友链页</div>
-          </a>
-          <div class="nav-controls">
-            <a href="https://blog-v8.kemeow.top" class="back-to-blog">
-              <i class="fas fa-arrow-left"></i> <span>返回博客</span>
-            </a>
-            <button class="theme-toggle" id="themeToggle">
-              <i class="fas fa-moon"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+<Layout title={title} description={description}>
+  <div class="max-w-4xl mx-auto px-4 py-8 min-h-screen">
+    <!-- 页头 -->
+    <header class="flex justify-between items-center mb-12">
+      <a href="https://blog-v8.kemeow.top" class="text-xl font-bold hover:text-indigo-600 transition-colors">
+        ← 返回博客主页
+      </a>
+      <button 
+        id="theme-toggle"
+        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        onclick={`toggleDarkMode()`}
+        aria-label="切换主题"
+      >
+        {darkMode ? (
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        )}
+      </button>
     </header>
 
-    <main class="main-content">
-      <div class="container">
-        <div class="page-title">
-          <h1>{pageTitle}</h1>
-          <p>{pageDescription}</p>
-        </div>
-        
-        <div class="page-description">
-          <p>以下是我精选的博客和网站，它们提供了高质量的内容和独特的见解。如果您希望与本站交换友链，请查看下方的申请条件。</p>
-        </div>
-        
-        <div class="friends-section">
-          <h2 class="section-title">
-            <i class="fas fa-handshake"></i>
-            <span>友情伙伴</span>
-          </h2>
-          <div class="friends-grid">
-            {friendsData.map(friend => (
-              <div class={`friend-card ${friend.status === 'inactive' ? 'inactive' : ''}`}>
-                <div 
-                  class="friend-avatar" 
-                  style={{ backgroundImage: `url('${friend.avatar}')` }}
-                ></div>
-                <div class="friend-info">
-                  <h3 class="friend-name">{friend.name}</h3>
-                  <a href={friend.url} class="friend-url" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-link"></i>
-                    {friend.url.replace('https://', '')}
-                  </a>
-                  <p class="friend-desc">{friend.description}</p>
-                  <div class="friend-tags">
-                    {friend.tags.map(tag => (
-                      <span class="friend-tag">{tag}</span>
-                    ))}
-                    {friend.status === 'active' && <span class="friend-tag">活跃</span>}
-                    {friend.status === 'inactive' && <span class="friend-tag inactive">暂停更新</span>}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        <div class="requirements-section">
-          <h2 class="section-title">
-            <i class="fas fa-clipboard-check"></i>
-            <span>友链申请条件</span>
-          </h2>
-          <ul class="requirements-list">
-            <li><strong>合法合规：</strong>网站内容必须符合中国法律法规，不包含任何违法或不良信息</li>
-            <li><strong>长期存在：</strong>网站已稳定运行超过6个月，且承诺长期维护更新</li>
-            <li><strong>更新频率：</strong>最近3个月内保持规律更新（技术博客至少每周1篇，其他类型至少每月2篇）</li>
-            <li><strong>内容质量：</strong>网站内容原创度高，具有实质性价值，非采集或转载为主</li>
-            <li><strong>主题相关：</strong>网站主题需与编程、技术、设计或数字创作相关</li>
-            <li><strong>友好互链：</strong>申请前请先将本站添加到您的友链页面，并保持可见状态</li>
-          </ul>
-          
-          <div class="apply-container">
-            <a href="mailto:kemiaofriends@163.com" class="apply-button">
-              <i class="fas fa-envelope"></i> 申请友链
-            </a>
-            <div class="email-hint">请发送申请至：kemiaofriends@163.com</div>
-          </div>
-        </div>
-      </div>
-    </main>
+    <!-- 标题 -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl font-bold mb-4">友情链接</h1>
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        与志同道合的朋友们互联，分享知识与灵感。以下是我精选的博客和网站链接。
+      </p>
+    </div>
 
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <p>© 2025 克喵爱吃卤面 | 基于Astro构建 | 友情链接页面</p>
-          <div class="footer-links">
-            <a href="https://blog-v8.kemeow.top">博客首页</a>
+    <!-- 友链申请条件 -->
+    <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-12">
+      <h2 class="text-2xl font-bold mb-4">友链申请条件</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>网站内容合法合规</li>
+        <li>博客需经常更新（至少每月一篇）</li>
+        <li>半年内未出现长时间无法访问的情况</li>
+        <li>网站设计整洁美观</li>
+        <li>已有本站的友情链接</li>
+      </ul>
+    </div>
+
+    <!-- 我的友链信息 -->
+    <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 mb-12">
+      <h2 class="text-2xl font-bold mb-4">我的信息</h2>
+      <pre class="bg-white dark:bg-gray-800 p-4 rounded-lg overflow-x-auto"><code>{`
+名称: 喵落阁
+头像: https://cn.cravatar.com/avatar/1F6C8947D35A8186A1647009BA8BC5F2?size=256
+介绍: 愿你看清一切真相后，依旧热爱你的家人和朋友。
+网站: https://blog-v8.kemeow.top
+      `}</code></pre>
+    </div>
+
+    <!-- 友链列表 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {friendsData.map(friend => (
+        <a 
+          href={friend.url} 
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`block border rounded-xl p-6 hover:shadow-lg transition-all duration-300 ${
+            darkMode ? 'border-gray-700 hover:border-indigo-500' : 'border-gray-200 hover:border-indigo-400'
+          }`}
+        >
+          <div class="flex items-start">
+            <img 
+              src={friend.avatar} 
+              alt={friend.name} 
+              class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-indigo-400"
+            />
+            <div>
+              <div class="flex items-center">
+                <h3 class="text-xl font-bold mr-3">{friend.name}</h3>
+                <span class={`w-3 h-3 rounded-full ${friend.alive ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                <span class="ml-1 text-sm">{friend.alive ? '正常' : '失联'}</span>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300 mt-2">{friend.description}</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </footer>
+        </a>
+      ))}
+    </div>
+
+    <!-- 友链申请按钮 -->
+    <div class="text-center">
+      <a 
+        href="mailto:kemiaofriends@163.com" 
+        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
+      >
+        申请友链
+      </a>
+      <p class="mt-4 text-gray-500 dark:text-gray-400">
+        请将您的博客信息发送至: kemiaofriends@163.com
+      </p>
+    </div>
   </div>
 
+  <!-- 样式 -->
   <style is:global>
-    /* 容器样式 */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --border-color: #e5e7eb;
+      --card-bg: #f9fafb;
     }
 
-    /* 头部样式 */
-    header {
-      background-color: var(--header-bg);
-      padding: 18px 0;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-color);
+    .dark {
+      --bg-color: #1a202c;
+      --text-color: #e2e8f0;
+      --border-color: #2d3748;
+      --card-bg: #2d3748;
     }
 
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 12px;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--accent-color) 0%, #7209b7 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 20px;
-    }
-
-    .logo-text {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .nav-controls {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.4rem;
-      color: var(--text-primary);
-      transition: var(--transition);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .theme-toggle:hover {
-      background-color: var(--border-color);
-      transform: rotate(15deg);
-    }
-
-    .back-to-blog {
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 500;
-      padding: 10px 18px;
-      border-radius: 30px;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--border-color);
-    }
-
-    .back-to-blog:hover {
-      background-color: var(--accent-color);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-    }
-
-    /* 主内容区样式 */
-    .main-content {
-      padding: 60px 0 30px;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
-      padding-bottom: 25px;
-    }
-
-    .page-title h1 {
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--accent-color) 0%, #7209b7 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: inline-block;
-    }
-
-    .page-title p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--text-secondary);
-    }
-
-    .page-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 5px;
-      background: linear-gradient(90deg, var(--accent-color), #7209b7);
-      border-radius: 3px;
-    }
-
-    .page-description {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    /* 友链展示区 */
-    .friends-section {
-      margin-bottom: 60px;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--border-color);
-    }
-
-    .section-title i {
-      color: var(--accent-color);
-      background: var(--bg-secondary);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-    }
-
-    .friends-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .friend-card {
-      background-color: var(--bg-card);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--card-shadow);
-      transition: var(--transition);
+    pre {
+      background-color: var(--card-bg);
       border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      position: relative;
-    }
-
-    .friend-card.inactive {
-      opacity: 0.8;
-      filter: grayscale(30%);
-    }
-
-    .friend-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .friend-avatar {
-      height: 160px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .friend-avatar::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    }
-
-    .friend-info {
-      padding: 25px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .friend-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-
-    .friend-url {
-      color: var(--accent-color);
-      text-decoration: none;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .friend-url:hover {
-      color: var(--accent-hover);
-      text-decoration: underline;
-    }
-
-    .friend-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      flex-grow: 1;
-      margin-bottom: 20px;
-      line-height: 1.7;
-    }
-
-    .friend-tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .friend-tag {
-      background-color: var(--border-color);
-      color: var(--text-secondary);
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-    }
-
-    .friend-tag.inactive {
-      background-color: #ff6b6b20;
-      color: #ff6b6b;
-    }
-
-    /* 申请条件区 */
-    .requirements-section {
-      background-color: var(--bg-card);
-      border-radius: 16px;
-      padding: 35px;
-      box-shadow: var(--card-shadow);
-      border: 1px solid var(--border-color);
-      margin-bottom: 40px;
-    }
-
-    .requirements-list {
-      padding-left: 25px;
-      margin-bottom: 30px;
-    }
-
-    .requirements-list li {
-      margin-bottom: 18px;
-      color: var(--text-primary);
-      position: relative;
-      padding-left: 25px;
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
-    .requirements-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 12px;
-      height: 12px;
-      background-color: var(--accent-color);
-      border-radius: 50%;
-    }
-
-    .requirements-list li strong {
-      color: var(--accent-color);
-      font-weight: 600;
-    }
-
-    .apply-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .apply-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--accent-color) 0%, #7209b7 100%);
-      color: white;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
-    }
-
-    .apply-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
-      background: linear-gradient(135deg, var(--accent-hover) 0%, #651aa0 100%);
-    }
-
-    .email-hint {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-top: 5px;
-    }
-
-    /* 页脚样式 */
-    footer {
-      background-color: var(--bg-secondary);
-      padding: 30px 0;
-      margin-top: 60px;
-      text-align: center;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .footer-content {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-color);
-    }
-
-    /* 响应式设计 */
-    @media (max-width: 768px) {
-      .friends-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      }
-      
-      .header-content {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .page-title h1 {
-        font-size: 2.2rem;
-      }
-      
-      .section-title {
-        font-size: 1.6rem;
-      }
-      
-      .requirements-section {
-        padding: 25px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .friends-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .page-title h1 {
-        font-size: 1.9rem;
-      }
-      
-      .back-to-blog span {
-        display: none;
-      }
-      
-      .back-to-blog {
-        padding: 10px;
-      }
     }
   </style>
-
-  <script is:inline>
-    // 主题切换功能
-    document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = themeToggle.querySelector('i');
-      
-      // 检查本地存储的主题偏好
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      }
-      
-      themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        
-        if (document.body.classList.contains('dark-mode')) {
-          themeIcon.classList.remove('fa-moon');
-          themeIcon.classList.add('fa-sun');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          themeIcon.classList.remove('fa-sun');
-          themeIcon.classList.add('fa-moon');
-          localStorage.setItem('theme', 'light');
-        }
-      });
-    });
-  </script>
 </Layout>
