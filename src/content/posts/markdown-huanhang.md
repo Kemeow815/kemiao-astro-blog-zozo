@@ -1,6 +1,6 @@
 ---
 slug: markdown-huanhang
-title: Markdowm 换行语法
+title: Markdown 换行语法
 description: Markdown 换行语法，如何创建换行以及最佳实践
 image: ../attachments/markdown-huanhang.png
 date: 2025-06-28T22:45:47+08:00
